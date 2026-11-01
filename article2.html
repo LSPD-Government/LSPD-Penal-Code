@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Article II | State of San Andreas Penal Codes</title><link rel="stylesheet" href="styles.css">
+<title>Article II | State of San Andreas Penal Codes</title><link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
 <header class="site-header"><nav class="nav">
@@ -16,7 +16,7 @@
 <p class="page-lead">Search and filter the 160 criminal codes used in the MDT.</p>
 <div class="toolbar"><input id="search" type="search" placeholder="Search P.C. number or offense..."><select id="category"><option>All Categories</option></select><select id="classification"><option>All Classifications</option><option>Felony</option><option>Misdemeanor</option><option>Infraction</option></select></div>
 <div class="stats"><div class="stat"><strong id="shown">160</strong><span>Charges Shown</span></div><div class="stat"><strong>160</strong><span>Total Offenses</span></div><div class="stat"><strong id="felonies">89</strong><span>Felonies</span></div><div class="stat"><strong id="misdemeanors">40</strong><span>Misdemeanors</span></div><div class="stat"><strong id="infractions">31</strong><span>Infractions</span></div></div>
-<div class="code-table-wrap"><table class="code-table"><thead><tr><th>P.C.</th><th>Offense</th><th>Classification</th><th>Time</th><th>Fine</th><th>Category</th></tr></thead><tbody id="codes"></tbody></table></div>
+<div class="code-table-wrap"><table class="code-table"><thead><tr><th>P.C.</th><th>CRIMINAL CHARGE / OFFENSE</th><th>CLASSIFICATION</th><th>SENTENCE</th><th>FINE</th><th>CATEGORY</th></tr></thead><tbody id="codes"></tbody></table></div>
 </main>
 <footer class="footer">State of San Andreas Penal Codes • Article II</footer>
 <script>
@@ -35,7 +35,8 @@ const C=[
 const search=document.getElementById('search'),globalSearch=document.getElementById('globalSearch'),cat=document.getElementById('category'),cls=document.getElementById('classification'),tbody=document.getElementById('codes');
 const cats=[...new Set(C.map(x=>x[5]))];cats.forEach(x=>{const o=document.createElement('option');o.textContent=x;cat.appendChild(o)});
 function money(n){return '$'+n.toLocaleString('en-US')}
-function render(){const q=search.value.toLowerCase().trim(),c=cat.value,k=cls.value;const rows=C.filter(x=>(!q||x.join(' ').toLowerCase().includes(q))&&(c==='All Categories'||x[5]===c)&&(k==='All Classifications'||x[2]===k));tbody.innerHTML=rows.length?rows.map(x=>`<tr><td class="pc">${x[0]}</td><td>${x[1]}</td><td>${x[2]}</td><td>${x[3]} months</td><td>${money(x[4])}</td><td>${x[5]}</td></tr>`).join(''):`<tr><td colspan="6" class="empty">No matching codes found.</td></tr>`;document.getElementById('shown').textContent=rows.length;document.getElementById('felonies').textContent=rows.filter(x=>x[2]==='Felony').length;document.getElementById('misdemeanors').textContent=rows.filter(x=>x[2]==='Misdemeanor').length;document.getElementById('infractions').textContent=rows.filter(x=>x[2]==='Infraction').length}
+function badge(c){return `<span class="badge ${c.toLowerCase()}">${c}</span>`}
+function render(){const q=search.value.toLowerCase().trim(),c=cat.value,k=cls.value;const rows=C.filter(x=>(!q||x.join(' ').toLowerCase().includes(q))&&(c==='All Categories'||x[5]===c)&&(k==='All Classifications'||x[2]===k));tbody.innerHTML=rows.length?rows.map(x=>`<tr><td class="pc">${x[0]}</td><td>${x[1]}</td><td class="classification">${badge(x[2])}</td><td>${x[3]} Months</td><td>${money(x[4])}</td><td>${x[5]}</td></tr>`).join(''):`<tr><td colspan="6" class="empty">No matching codes found.</td></tr>`;document.getElementById('shown').textContent=rows.length;document.getElementById('felonies').textContent=rows.filter(x=>x[2]==='Felony').length;document.getElementById('misdemeanors').textContent=rows.filter(x=>x[2]==='Misdemeanor').length;document.getElementById('infractions').textContent=rows.filter(x=>x[2]==='Infraction').length}
 [search,cat,cls].forEach(x=>x.addEventListener('input',render));globalSearch.addEventListener('input',()=>{if(globalSearch.value!==search.value)search.value=globalSearch.value;render()});globalSearch.addEventListener('keydown',e=>{if(e.key==='Enter'){search.value=globalSearch.value;render();document.querySelector('.code-table-wrap').scrollIntoView({behavior:'smooth'})}});
 const params=new URLSearchParams(location.search);if(params.get('q')){search.value=params.get('q');globalSearch.value=params.get('q')}render();
 </script>
