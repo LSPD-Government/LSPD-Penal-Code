@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Information | State of San Andreas Penal Codes</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header"><nav class="nav">
+<a class="brand" href="index.html"><span class="brand-mark">SA</span><span>STATE OF SAN ANDREAS</span></a>
+<button class="menu-toggle" aria-label="Open menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+<div class="nav-links"><a href="index.html">Home</a><a href="article1.html">Article I</a><a href="article2.html">Article II</a><a class="active" href="information.html">Information</a></div>
+<input class="global-search" id="globalSearch" type="search" placeholder="Search P.C. number or offense..." aria-label="Search Penal Code">
+</nav></header>
+<main class="page">
+<h1 class="page-title">INFORMATION</h1>
+<p class="page-lead">General information about the State of San Andreas Penal Codes and how to use this reference.</p>
+<section class="info-block"><h2>Purpose</h2><p>This website provides a centralized reference for the State of San Andreas Penal Codes. It separates <strong>Article I — Civil Codes</strong> from <strong>Article II — Criminal Codes</strong> so users can quickly locate the rule or charge they need.</p></section>
+<section class="info-block"><h2>Article I</h2><p>Article I contains Civil Codes, including sentencing definitions, legal definitions, weapon and substance classifications, government-related definitions, and state guidelines.</p></section>
+<section class="info-block"><h2>Article II</h2><p>Article II contains the criminal codes used in the MDT. Each entry includes its P.C. number, offense name, classification, sentence, fine, and category. Use the search bar and filters to quickly locate a specific charge.</p></section>
+<section class="info-block"><h2>Learn the Codes</h2><div class="notice"><strong>Important:</strong> Officers and department members should make an effort to learn and remember the commonly used Penal Codes instead of relying on the website for every interaction.</div><p>Use this site as a reference when you need to verify a P.C. number, classification, sentence, fine, or definition. Familiarity with the codes helps keep traffic stops, arrests, reports, and other department actions consistent.</p></section>
+<section class="info-block"><h2>Using Search</h2><ul><li>Search by P.C. number, such as <strong>1001</strong> or <strong>8001</strong>.</li><li>Search by an offense name, such as <strong>Robbery</strong> or <strong>Evading</strong>.</li><li>On Article II, combine the search with category and classification filters.</li><li>The search bar in the header can be used from any page and will take you to the matching Article II results.</li></ul></section>
+</main>
+<footer class="footer">State of San Andreas Penal Codes • Information</footer>
+<script>document.getElementById('globalSearch').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.value.trim())location.href='article2.html?q='+encodeURIComponent(e.target.value.trim())});</script>
+</body>
+</html>
